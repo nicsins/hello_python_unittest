@@ -27,37 +27,37 @@ class TestMileageDB(TestCase):
 
 
     def test_add_new_vehicle(self):
-        miles.add_miles('Blue Car', 100)
-        expected = { 'Blue Car': 100 }
+        miles.add_miles('Blue Car'.upper(), 100)
+        expected = { 'Blue Car'.upper(): 100 }
         self.compare_db_to_expected(expected)
 
-        miles.add_miles('Green Car', 50)
-        expected['Green Car'] = 50
+        miles.add_miles('Green Car'.upper(), 50)
+        expected['Green Car'.upper()] = 50
         self.compare_db_to_expected(expected)
 
 
     def test_increase_miles_for_vehicle(self):
-        miles.add_miles('Red Car', 100)
-        expected = { 'Red Car': 100 }
+        miles.add_miles('Red Car'.upper(), 100)
+        expected = { 'Red Car'.upper(): 100 }
         self.compare_db_to_expected(expected)
 
-        miles.add_miles('Red Car', 50)
-        expected['Red Car'] = 100 + 50
+        miles.add_miles('Red Car'.upper(), 50)
+        expected['Red Car'.upper()] = 100 + 50
         self.compare_db_to_expected(expected)
 
 
     def test_add_new_vehicle_no_vehicle(self):
         with self.assertRaises(Exception):
-            mileage.addMiles(None, 100)
+            miles.addMiles(None, 100)
 
 
     def test_add_new_vehicle_invalid_new_miles(self):
         with self.assertRaises(MileageError):
-            miles.add_miles('Car', -100)
+            miles.add_miles('Car'.upper(), -100)
         with self.assertRaises(MileageError):
-            miles.add_miles('Car', 'abc')
+            miles.add_miles('Car'.upper(), 'abc')
         with self.assertRaises(MileageError):
-            miles.add_miles('Car', '12.def')
+            miles.add_miles('Car'.upper(), '12.def')
 
 
     # This is not a test method, instead, it's used by the test methods
